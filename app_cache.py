@@ -3,7 +3,8 @@ import streamlit as st
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.embeddings import OllamaEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import Chroma
+#from langchain_community.vectorstores import Chroma
+from langchain.vectorstores import FAISS
 from langchain_community.chat_models import ChatOllama
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
@@ -19,12 +20,8 @@ def load_pdf_and_create_vector_db(local_path):
     chunks = text_splitter.split_documents(data)
     
     # Add to vector database
-    vector_db = Chroma.from_documents(
-        documents=chunks, 
-        embedding=OllamaEmbeddings(model="nomic-embed-text",show_progress=True),
-        collection_name="local-rag"
-    )
-
+    embedding = OllamaEmbeddings(model="nomic-embed-text",show_progress=True)
+    vector_db = FAISS.from_documents(chunks, embedding)
     return vector_db
 
 # Funtion for Similarity search
