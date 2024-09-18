@@ -77,7 +77,7 @@ def main():
     st.header("Local knowledge base ChatBot :bird:")
 
     # define the path to the PDF file
-    local_path = "Data\\incose_vision_2035.pdf"
+    local_path = "Data\incose_vision_2035.pdf"
 
     # load the vector database
     vector_db = load_pdf_and_create_vector_db(local_path)
