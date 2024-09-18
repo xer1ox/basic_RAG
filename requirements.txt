@@ -3,3 +3,4 @@ langchain
 chromadb
 pypdf
 tiktoken
+faiss-cpu
